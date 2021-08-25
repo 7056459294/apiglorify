@@ -11,4 +11,4 @@ python-decouple==3.4
 psycopg2==2.8.6
 pathlib==1.0.1
 pillow==7.2.0
-djangorestframework 3.12.4
+djangorestframework==3.12.4
