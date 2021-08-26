@@ -132,4 +132,13 @@ STATICFILES_STORAGE='whitenoise.storage.CompressedMainfestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#for only data
+
+REST_FRAMEWORK = {
+
+    "DEFAULT_RENDERER_CLASSES":("rest_framework.renderers.JSONRenderer",)
+}
+
+
 django_heroku.settings(locals())
+

@@ -5,6 +5,12 @@ from rest_framework import viewsets
 
 from .serializers import userSerializer
 from .models import user,user2
+
+#for auth api user 
+
+#from rest_framework.authentication import SessionAuthentication
+#from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
 #import pushbullet
 #import random
 
@@ -13,12 +19,18 @@ class userViewSet(viewsets.ModelViewSet):
 
     queryset = user.objects.all().order_by('username')
     serializer_class = userSerializer
+    #for auth api user 
+    #authentication_classes=[SessionAuthentication]
+    #permission_classes=[IsAuthenticatedOrReadOnly]
 
 class user2ViewSet(viewsets.ModelViewSet):
 
 
     queryset = user2.objects.all().order_by('username')
     serializer_class = userSerializer
+    #for auth api user 
+    #authentication_classes=[SessionAuthentication]
+    #permission_classes=[IsAuthenticatedOrReadOnly]
 
 '''
    no=user.objects.all()
