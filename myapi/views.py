@@ -8,5 +8,5 @@ from .models import user
 
 
 class userViewSet(viewsets.ModelViewSet):
-    queryset = user.objects.all().order_by('name')
+    queryset = user.objects.all().order_by('username')
     serializer_class = userSerializer
