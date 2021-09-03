@@ -135,7 +135,7 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #for only data
-'''
+
 REST_FRAMEWORK = {
 
     "DEFAULT_RENDERER_CLASSES":("rest_framework.renderers.JSONRenderer",)
@@ -143,4 +143,4 @@ REST_FRAMEWORK = {
 
 
 django_heroku.settings(locals())
-'''
+
