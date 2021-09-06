@@ -8,8 +8,11 @@ from rest_framework import status
 from .serializers import userSerializer
 from .serializers import guserSerializer
 from .serializers import hotelSerializer
+from .serializers import venueSerializer
+from .serializers import vendorSerializer
 
-from .models import hotel, user,guser
+
+from .models import hotel, user,guser,venue,vendor
 #from mysite.myapi import serializers
 
 
@@ -146,9 +149,111 @@ class hotelViewSet(viewsets.ModelViewSet):
     
 #_____________________________________________________________________________________________#    
     
+class venueViewSet(viewsets.ModelViewSet):
+
+
+    queryset = venue.objects.all().order_by('venue_name')
+    serializer_class = venueSerializer
+    #for auth api user 
+    #authentication_classes=[SessionAuthentication]
+    #permission_classes=[IsAuthenticatedOrReadOnly]
+
+    def retrieve(self, request, pk):
+       city=pk
+       #usr=user.objects.get(username=username)
+       if venue.objects.filter(city=city).exists():
+           venuedata=venue.objects.filter(city=city)
+           serializer=venueSerializer(venuedata,many=True)
+           return Response(serializer.data)
+       else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
     
+    def destroy(self, request,pk):
+       venue_name=pk
+       venuename=venue.objects.get(venue_name=venue_name)
+       venuename.delete()
+    def list(self ,request):
+        usr=venue.objects.all()
+        serializer=venueSerializer(usr,many=True)
+        return Response(serializer.data)
+    def create(sefl ,request):
+        serializer=venueSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'msg':'data created'},status=status.HTTP_201_CREATED)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    def update(sefl ,request,pk):
+        venue_name=pk
+        venueupdate=venue.objects.get(venue_name=venue_name)
+        serializer=venueSerializer(venueupdate,data=request.data)
+        if serializer.is_valid():
+           serializer.save()
+           return Response({'msg':'data update'},status=status.HTTP_201_CREATED)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    def partial_update(sefl ,request,pk):
+        venue_name=pk
+        usr=venue.objects.get(venue_name=venue_name)
+        serializer=venueSerializer(usr,data=request.data,partial=True)
+        if serializer.is_valid():
+           serializer.save()
+           return Response({'msg':'data partial update'},status=status.HTTP_201_CREATED)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+   
     
+#_____________________________________________________________________________________________#    
+
+class vendorViewSet(viewsets.ModelViewSet):
+
+
+    queryset = vendor.objects.all().order_by('vendor_name')
+    serializer_class = vendorSerializer
+    #for auth api user 
+    #authentication_classes=[SessionAuthentication]
+    #permission_classes=[IsAuthenticatedOrReadOnly]
+
+    def retrieve(self, request, pk):
+       city=pk
+       #usr=user.objects.get(username=username)
+       if vendor.objects.filter(city=city).exists():
+           vendordata=vendor.objects.filter(city=city)
+           serializer=vendorSerializer(vendordata,many=True)
+           return Response(serializer.data)
+       else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
     
+    def destroy(self, request,pk):
+       vendor_name=pk
+       vendorname=vendor.objects.get(vendor_name=vendor_name)
+       vendorname.delete()
+    def list(self ,request):
+        usr=vendor.objects.all()
+        serializer=vendorSerializer(usr,many=True)
+        return Response(serializer.data)
+    def create(sefl ,request):
+        serializer=vendorSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'msg':'data created'},status=status.HTTP_201_CREATED)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    def update(sefl ,request,pk):
+        vendor_name=pk
+        vendorupdate=vendor.objects.get(vendor_name=vendor_name)
+        serializer=vendorSerializer(vendorupdate,data=request.data)
+        if serializer.is_valid():
+           serializer.save()
+           return Response({'msg':'data update'},status=status.HTTP_201_CREATED)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    def partial_update(sefl ,request,pk):
+        vendor_name=pk
+        usr=vendor.objects.get(vendor_name=vendor_name)
+        serializer=vendorSerializer(usr,data=request.data,partial=True)
+        if serializer.is_valid():
+           serializer.save()
+           return Response({'msg':'data partial update'},status=status.HTTP_201_CREATED)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+   
+    
+#_____________________________________________________________________________________________#        
     
 '''
    no=user.objects.all()

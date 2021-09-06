@@ -33,4 +33,36 @@ class hotel(models.Model):
     image5=models.ImageField(upload_to="hotel_image/",blank=True)
 
     def __str__(self):
-       return self.hotel_name                          
+       return self.hotel_name    
+
+class venue(models.Model):
+    venue_name=models.CharField(max_length=200, default="")
+    desc=models.CharField(max_length=200, default="")
+    city=models.CharField(max_length=200, default="")
+    address=models.CharField(max_length=300, default="")
+    price=models.IntegerField()
+    faculties= models.JSONField()
+    image1=models.ImageField(upload_to="venue_image/",blank=True)
+    image2=models.ImageField(upload_to="venue_image/",blank=True)
+    image3=models.ImageField(upload_to="venue_image/",blank=True)
+    image4=models.ImageField(upload_to="venue_image/",blank=True)
+    image5=models.ImageField(upload_to="venue_image/",blank=True)
+    
+    def __str__(self):
+      return self.venue_name  
+
+class vendor(models.Model):
+    vendor_name=models.CharField(max_length=200, default="")
+    desc=models.CharField(max_length=200, default="")
+    city=models.CharField(max_length=200, default="")
+    address=models.CharField(max_length=300, default="")
+    price=models.IntegerField()
+    food_type= models.JSONField()
+    image1=models.ImageField(upload_to="vendor_image/",blank=True)
+    image2=models.ImageField(upload_to="vendor_image/",blank=True)
+    image3=models.ImageField(upload_to="vendor_image/",blank=True)
+    image4=models.ImageField(upload_to="vendor_image/",blank=True)
+    image5=models.ImageField(upload_to="vendor_image/",blank=True)
+    
+    def __str__(self):
+        return self.vendor_name  
